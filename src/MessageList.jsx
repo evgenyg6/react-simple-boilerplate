@@ -8,8 +8,11 @@ class MessageList extends Component {
       return <Message key={eachMsg.key} username={eachMsg.username} content={eachMsg.content} />;
     });
     return (
+
       <main className='messages'>
+
         {messageComponents}
+
       </main>
     )
   };

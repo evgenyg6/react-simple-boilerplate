@@ -6,6 +6,7 @@ class App extends Component {
 
   constructor(props) {
     super(props);
+    this.messageBox = this.messageBox.bind(this);
     this.state = {
       currentUser: {name: "Bob"}, // optional. if currentUser is not defined, it means the user is Anonymous
       messages: [
@@ -22,20 +23,17 @@ class App extends Component {
       ]
 };
   }
-componentDidMount() {
-  setTimeout(() => {
-    console.log("Simulating incoming message");
+messageBox(newUser, message) {
+    console.log("If you don't know, now you know.", newUser, message);
+    let newKey = this.state.messages.length + 1;
     // Add a new message to the list of messages in the data store
-    const newMessage = {key: 3, username: "Michelle", content: "Hello there!"};
-    const messages = this.state.messages.concat(newMessage)
+    const newMessage = {key: newKey, username: newUser, content: message};
+    const allMessages = this.state.messages.concat(newMessage)
     // Update the state of the app component.
     // Calling setState will trigger a call to render() in App and all child components.
-    this.setState({messages: messages})
-  }, 3000);
-}
+    this.setState({messages: allMessages})
+    document.getElementById('chatbarMessage').value = '';
 
-messageBox(content){
-  console.log();
 }
   render() {
     return (

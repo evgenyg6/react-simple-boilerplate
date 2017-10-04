@@ -4,19 +4,20 @@ class ChatBar extends Component {
 
     constructor(props) {
     super(props);
-    this.onKeyUp = this.onKeyUp.bind(this);
+    this.onType = this.onType.bind(this);
 
     }
-    onKeyUp() {
-    this.props.messageBox();
-
+    onType(press) {
+    if(press.key === 'Enter'){
+    this.props.messageBox(document.getElementById('chatbarUsername').value, document.getElementById('chatbarMessage').value);
     }
+  };
 
   render() {
     return (
     <footer className="chatbar">
-    <input className="chatbar-username" defaultValue={this.props.currentUser.name} placeholder="Your Name (Optional)" />
-    <input className="chatbar-message" placeholder="Type a message and hit ENTER" onKeyUp={this.onKeyUp} />
+    <input id="chatbarUsername" defaultValue={this.props.currentUser.name} placeholder="Your Name (Optional)" />
+    <input id="chatbarMessage" placeholder="Type a message and hit ENTER" onKeyUp={this.onType} />
     </footer>
     );
   }
