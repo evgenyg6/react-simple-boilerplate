@@ -1,15 +1,13 @@
 import React, {Component} from 'react';
 
 class Message extends Component {
-    constructor(props) {
-    super(props);
-    }
+
   render() {
 
     return (
     <div className="message">
-    <span className="chatbar-username">defaultValue={this.props.username} </span>
-    <span className="chatbar-content">defaultValue={this.props.content} </span>
+    <span className="message-username">{this.props.username} </span>
+    <span className="message-content">{this.props.content} </span>
     </div>
     );
   }
