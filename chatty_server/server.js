@@ -17,13 +17,13 @@ const server = express()
 const wss = new SocketServer({
     server
 });
-
+// Convers back to JSON an dbroadcasts it back to users
 function broadcastMessage(message) {
     for (let client of wss.clients) {
         client.send(JSON.stringify(message));
     }
 }
-
+// Recieves message, parses it and adds a UUID
 function handleMessage(message) {
     var uUid = uuidv1();
     message = JSON.parse(message);
