@@ -5,7 +5,8 @@ class MessageList extends Component {
 
   render() {
     const messageComponents = this.props.messages.map(eachMsg => {
-      return <Message key={eachMsg.key} username={eachMsg.username} content={eachMsg.content} />;
+      //eachMsg = JSON.parse(eachMsg);
+      return <Message id={eachMsg.id} key={eachMsg.id} username={eachMsg.username} content={eachMsg.content} />;
     });
     return (
 

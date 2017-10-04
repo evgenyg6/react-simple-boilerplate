@@ -7,6 +7,7 @@ class ChatBar extends Component {
     this.onType = this.onType.bind(this);
 
     }
+    //Selects chatbar username and messagr from ChatBar itself
     onType(press) {
     if(press.key === 'Enter'){
     this.props.messageBox(document.getElementById('chatbarUsername').value, document.getElementById('chatbarMessage').value);
@@ -16,8 +17,8 @@ class ChatBar extends Component {
   render() {
     return (
     <footer className="chatbar">
-    <input id="chatbarUsername" defaultValue={this.props.currentUser.name} placeholder="Your Name (Optional)" />
-    <input id="chatbarMessage" placeholder="Type a message and hit ENTER" onKeyUp={this.onType} />
+    <input id="chatbarUsername" className="chatbar-username" defaultValue={this.props.currentUser.name} placeholder="Your Name (Optional)" />
+    <input id="chatbarMessage" className="chatbar-message" placeholder="Type a message and hit ENTER" onKeyUp={this.onType} />
     </footer>
     );
   }
