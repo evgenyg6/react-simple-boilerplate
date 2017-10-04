@@ -27,8 +27,6 @@ function broadcastMessage(message) {
 function handleMessage(message) {
     var uUid = uuidv1();
     message = JSON.parse(message);
-    console.log("THIS MESSAGE");
-    console.log(message.username);
     let msg = {
         id: uUid,
         username: message.username,
