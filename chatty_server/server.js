@@ -29,6 +29,7 @@ function handleMessage(message) {
     message = JSON.parse(message);
     let msg = {
         id: uUid,
+        type: message.type,
         username: message.username,
         content: message.content
     }
