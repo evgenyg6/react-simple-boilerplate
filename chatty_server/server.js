@@ -31,7 +31,8 @@ function handleMessage(message) {
         id: uUid,
         type: message.type,
         username: message.username,
-        content: message.content
+        content: message.content,
+        oldUsername: message.oldUsername
     }
     broadcastMessage(msg);
 };

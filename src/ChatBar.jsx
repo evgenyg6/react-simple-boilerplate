@@ -16,7 +16,7 @@ class ChatBar extends Component {
     //Selects user only
     onUserChange(press) {
       if(press.key === 'Enter'){
-      this.props.messageBox("incomingNotification", document.getElementById('chatbarUsername').value);
+      this.props.messageBox("incomingNotification", document.getElementById('chatbarUsername').value, "", this.props.currentUser.name);
       }
     };
 
