@@ -9,7 +9,7 @@ class App extends Component {
     this.messageBox = this.messageBox.bind(this);
 
     this.state = {
-      currentUser: {name: "Bob"},
+      currentUser: "Bob",
       messages: []
     };
   }

@@ -16,7 +16,7 @@ class ChatBar extends Component {
     //Selects user only
     onUserChange(press) {
       if(press.key === 'Enter'){
-      this.props.messageBox("incomingNotification", document.getElementById('chatbarUsername').value, "", this.props.currentUser.name);
+      this.props.messageBox("incomingNotification", document.getElementById('chatbarUsername').value, "", this.props.currentUser);
       }
     };
 
@@ -24,7 +24,7 @@ class ChatBar extends Component {
   render() {
     return (
     <footer className="chatbar">
-    <input id="chatbarUsername" className="chatbar-username" defaultValue={this.props.currentUser.name} onKeyPress={this.onUserChange} placeholder="Your Name (Optional)" />
+    <input id="chatbarUsername" className="chatbar-username" defaultValue={this.props.currentUser} onKeyPress={this.onUserChange} placeholder="Your Name (Optional)" />
     <input id="chatbarMessage" className="chatbar-message" placeholder="Type a message and hit ENTER" onKeyPress={this.onType} />
     </footer>
     );
