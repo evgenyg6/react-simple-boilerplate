@@ -36,21 +36,32 @@ function handleMessage(message) {
         username: message.username,
         content: message.content,
         oldUsername: message.oldUsername,
+        userCount: userCount
     }
     broadcastMessage(msg);
 };
 
 
 wss.on('connection', (client) => {
-    userCount++; //increase userCount on connect
     console.log('Client connected');
-
-    let msg2 = {
+    userCount++; //increase userCount on connect
+    let onlineUsers = {
         userCount: userCount
     }
-    broadcastMessage(msg2);
+
+    broadcastMessage(onlineUsers);
 
     client.on('message', handleMessage);
+    //On connection close, reduce user count by 1, broadcast it
+    client.on('close', () => {
+
+        userCount--;
+        let onlineUsers = {
+            userCount: userCount
+        }
+        broadcastMessage(onlineUsers);
+
+    });
+
     // Set up a callback for when a client closes the socket. This usually means they closed their browser.
-    client.on('close', () => console.log('User disconnected.'));
 });
