@@ -11,7 +11,9 @@ class App extends Component {
     this.state = {
       currentUser: "Bob",
       messages: [],
-      userCount: ''
+      userCount: 0,
+      isConnected: '',
+      isDisconnected: ''
     };
   }
   // Grabs messages from chatbarMessage and chatbarUsername and displays them
@@ -33,7 +35,7 @@ class App extends Component {
       <a href="/" className="navbar-brand">Chatty</a>
       <div className='user-count'>Users online: {this.state.userCount}</div>
       </nav>
-      <MessageList messages={this.state.messages}/>
+      <MessageList userStatus1={this.state.isConnected} userStatus2={this.state.isDisconnected}  messages={this.state.messages}/>
       <ChatBar messageBox= {this.messageBox} currentUser={this.state.currentUser}/>
       </div>
     );
@@ -43,31 +45,15 @@ class App extends Component {
     const data = JSON.parse(event.data);
     document.getElementById('chatbarMessage').value = '';
     //Sets the above STATE object to NEW state
+    console.log(data.isConnected);
+    console.log(data.isDisconnected);
     this.setState({
       messages: this.state.messages.concat(data),
       currentUser: data.username,
       userCount: data.userCount
     });
-    //renders incoming message, or alerts of notifications(name change)
-/*    switch(data.type) {
-      case "incomingMessage":
-        // Concatinates, converts object to JSON and sends to server
-        const allMessages = this.state.messages.concat(data);
-        this.setState({messages: allMessages});
-        document.getElementById('chatbarMessage').value = '';
-        break;
-      case "incomingNotification":
-        console.log('The user ' + data.oldUsername + ' has changed their name to ' + data.username);
-        //newSocket.send(JSON.stringify({content: 'The user has changed their name to: ' + this.state.currentUser}));
-        break;
-      default:
-        throw new Error("Unknown event type " + data.type);
-      }*/
-    })
 
-   /* newSocket.onopen = function(){
-    newSocket.send(JSON.stringify({content: 'You are now connected.'}));
-    }*/
+  })
   }
 }
 export default App;
