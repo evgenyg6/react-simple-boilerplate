@@ -10,7 +10,7 @@ class App extends Component {
 
     this.state = {
       currentUser: "Bob",
-      messages: []
+      messages: [],
     };
   }
   // Grabs messages from chatbarMessage and chatbarUsername and displays them
@@ -38,14 +38,14 @@ class App extends Component {
   }
   componentDidMount(){
     newSocket.addEventListener('message', (event) =>{
-    const data = JSON.parse(event.data)
+    const data = JSON.parse(event.data);
     //Sets state of above currentUser object to NEW state of
     this.setState({
-      currentUser: data.username,
-
+      messages: this.state.messages.concat(data),
+      currentUser: data.username
     });
     //renders incoming message, or alerts of notifications(name change)
-    switch(data.type) {
+/*    switch(data.type) {
       case "incomingMessage":
         // Concatinates, converts object to JSON and sends to server
         const allMessages = this.state.messages.concat(data);
@@ -53,13 +53,12 @@ class App extends Component {
         document.getElementById('chatbarMessage').value = '';
         break;
       case "incomingNotification":
-        console.log(data.oldUsername);
         console.log('The user ' + data.oldUsername + ' has changed their name to ' + data.username);
         //newSocket.send(JSON.stringify({content: 'The user has changed their name to: ' + this.state.currentUser}));
         break;
       default:
         throw new Error("Unknown event type " + data.type);
-      }
+      }*/
     })
 
    /* newSocket.onopen = function(){
