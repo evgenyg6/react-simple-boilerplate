@@ -12,8 +12,6 @@ class App extends Component {
       currentUser: "Bob",
       messages: [],
       userCount: 0,
-      isConnected: '',
-      isDisconnected: ''
     };
   }
   // Grabs messages from chatbarMessage and chatbarUsername and displays them
@@ -35,7 +33,7 @@ class App extends Component {
       <a href="/" className="navbar-brand">Chatty</a>
       <div className='user-count'>Users online: {this.state.userCount}</div>
       </nav>
-      <MessageList userStatus1={this.state.isConnected} userStatus2={this.state.isDisconnected}  messages={this.state.messages}/>
+      <MessageList messages={this.state.messages}/>
       <ChatBar messageBox= {this.messageBox} currentUser={this.state.currentUser}/>
       </div>
     );
@@ -45,8 +43,6 @@ class App extends Component {
     const data = JSON.parse(event.data);
     document.getElementById('chatbarMessage').value = '';
     //Sets the above STATE object to NEW state
-    console.log(data.isConnected);
-    console.log(data.isDisconnected);
     this.setState({
       messages: this.state.messages.concat(data),
       currentUser: data.username,
