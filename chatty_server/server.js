@@ -36,17 +36,22 @@ function handleMessage(message) {
         username: message.username,
         content: message.content,
         oldUsername: message.oldUsername,
-        userCount: userCount
+        userCount: userCount,
+        isConnected: 'User has connected.',
+        isDisconnected: 'User has disconnected.'
     }
     broadcastMessage(msg);
 };
 
 
 wss.on('connection', (client) => {
-    console.log('Client connected');
+    console.log('Client connected.');
+    var uUid = uuidv1();
     userCount++; //increase userCount on connect
     let onlineUsers = {
-        userCount: userCount
+        key: uUid,
+        userCount: userCount,
+        isConnected: 'User has connected.'
     }
 
     broadcastMessage(onlineUsers);
@@ -54,10 +59,13 @@ wss.on('connection', (client) => {
     client.on('message', handleMessage);
     //On connection close, reduce user count by 1, broadcast it
     client.on('close', () => {
-
+        var uUid2 = uuidv1();
+        console.log('Client disconnected.');
         userCount--;
         let onlineUsers = {
-            userCount: userCount
+            key: uUid2,
+            userCount: userCount,
+            isDisconnected: 'User has disconnected.'
         }
         broadcastMessage(onlineUsers);
 
