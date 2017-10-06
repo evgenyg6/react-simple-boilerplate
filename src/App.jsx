@@ -11,6 +11,7 @@ class App extends Component {
     this.state = {
       currentUser: "Bob",
       messages: [],
+      userCount: ''
     };
   }
   // Grabs messages from chatbarMessage and chatbarUsername and displays them
@@ -20,7 +21,7 @@ class App extends Component {
         type: type,
         username: newUser,
         content: message,
-        oldUsername: oldUser
+        oldUsername: oldUser,
       };
       newSocket.send(JSON.stringify(msg));
   }
@@ -30,6 +31,7 @@ class App extends Component {
       <div id='container'>
       <nav className="navbar">
       <a href="/" className="navbar-brand">Chatty</a>
+      <div className='user-count'>Users online: {this.state.userCount}</div>
       </nav>
       <MessageList messages={this.state.messages}/>
       <ChatBar messageBox= {this.messageBox} currentUser={this.state.currentUser}/>
@@ -39,10 +41,12 @@ class App extends Component {
   componentDidMount(){
     newSocket.addEventListener('message', (event) =>{
     const data = JSON.parse(event.data);
-    //Sets state of above currentUser object to NEW state of
+    document.getElementById('chatbarMessage').value = '';
+    //Sets the above STATE object to NEW state
     this.setState({
       messages: this.state.messages.concat(data),
-      currentUser: data.username
+      currentUser: data.username,
+      userCount: data.userCount
     });
     //renders incoming message, or alerts of notifications(name change)
 /*    switch(data.type) {

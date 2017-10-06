@@ -4,8 +4,7 @@ class Message extends Component {
 
   render() {
     let viewMessage;
-    const {type, username, content, oldUsername} = this.props.data;
-    console.log(this.props.data);
+    const {type, username, content, oldUsername, userCount} = this.props.data;
     if(type === "incomingNotification"){
       viewMessage = <span className="message-system">{`${oldUsername} changed their name to ${username}`}</span>;
     }else {
