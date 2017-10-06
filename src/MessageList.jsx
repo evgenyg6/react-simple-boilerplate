@@ -9,14 +9,10 @@ class MessageList extends Component {
       return <Message key={eachMsg.id} data={eachMsg}/>;
     });
     return (
-
       <main className='messages'>
-
         {messageComponents}
-
       </main>
     )
   }
 }
-
 export default MessageList;
