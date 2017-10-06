@@ -1,5 +1,4 @@
 // server.js
-
 const express = require('express');
 const SocketServer = require('ws').Server;
 const uuidv1 = require('uuid/v1');
@@ -17,18 +16,17 @@ const server = express()
 const wss = new SocketServer({
     server
 });
-
+// Global variable so it may be updated
 let userCount = 0;
-
-// Convers back to JSON an dbroadcasts it back to users
+// Convers back to JSON an dbroadcasts it back to ALL users
 function broadcastMessage(message) {
     for (let client of wss.clients) {
         client.send(JSON.stringify(message));
     }
 }
-// Recieves message, parses it and adds a UUID
+// Recieves message, parses it, adds a UUID and sends it to broadcastMessage function
 function handleMessage(message) {
-    var uUid = uuidv1();
+    let uUid = uuidv1();
     message = JSON.parse(message);
     let msg = {
         id: uUid,
@@ -46,20 +44,21 @@ function handleMessage(message) {
 
 wss.on('connection', (client) => {
     console.log('Client connected.');
-    var uUid = uuidv1();
-    userCount++; //increase userCount on connect
+    //On connect, increase userCount on connect, broadcast it
+    userCount++;
+    let uUid = uuidv1();
     let onlineUsers = {
         id: uUid,
         userCount: userCount,
         isConnected: 'User has connected.'
     }
-
     broadcastMessage(onlineUsers);
-
+    //On message event, run handleMessage function
     client.on('message', handleMessage);
+
     //On connection close, reduce user count by 1, broadcast it
     client.on('close', () => {
-        var uUid2 = uuidv1();
+        let uUid2 = uuidv1();
         console.log('Client disconnected.');
         userCount--;
         let onlineUsers = {
@@ -68,8 +67,5 @@ wss.on('connection', (client) => {
             isDisconnected: 'User has disconnected.'
         }
         broadcastMessage(onlineUsers);
-
     });
-
-    // Set up a callback for when a client closes the socket. This usually means they closed their browser.
 });

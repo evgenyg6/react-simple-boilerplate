@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import MessageList from './MessageList.jsx';
 import ChatBar from './ChatBar.jsx';
-let newSocket = new WebSocket("ws:localhost:3001");
+let newSocket = new WebSocket('ws:localhost:3001');
 
 class App extends Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class App extends Component {
     this.messageBox = this.messageBox.bind(this);
 
     this.state = {
-      currentUser: "Bob",
+      currentUser: 'Bob',
       messages: [],
       userCount: 0,
     };
@@ -29,8 +29,8 @@ class App extends Component {
   render() {
     return (
       <div id='container'>
-      <nav className="navbar">
-      <a href="/" className="navbar-brand">Chatty</a>
+      <nav className='navbar'>
+      <a href='/' className='navbar-brand'>Chatty</a>
       <div className='user-count'>Users online: {this.state.userCount}</div>
       </nav>
       <MessageList messages={this.state.messages}/>
