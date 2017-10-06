@@ -1,28 +1,24 @@
-React Boilerplate
+Chatty App
 =====================
 
-A minimal and light dev environment for ReactJS.
+A simple chat application that allows multiple users to connect to a single chatroom and, you guessed it, chat!
+
+## Installation
+Run npm install to grab all the missing dependencies
+npm start to launch both the server, and the client.
+
+Use npm start within both the chattyApp root folder, and chattyApp/.
+
+In your browser, open http://localhost:3000. Do this multiple times for multiple users.
+
+## Screenshots
+
+!["Users connecting"](https://github.com/evgenyg6/react-simple-boilerplate/blob/master/docs/chatty-connection.png)
+!["Users changing name"](https://github.com/evgenyg6/react-simple-boilerplate/blob/master/docs/chatty-namechange.png)
+!["Users disconnecting"](https://github.com/evgenyg6/react-simple-boilerplate/blob/master/docs/chatty-disconnect.png)
 
 
-Install the dependencies and start the server.
-
-```
-npm install
-npm start
-open http://localhost:3000
-```
-
-### Static Files
-
-### Linting
-
-This boilerplate project includes React ESLint configuration.
-
-```
-npm run lint
-```
-
-### Dependencies
+## Dependencies
 
 * babel-core
 * babel-loader
