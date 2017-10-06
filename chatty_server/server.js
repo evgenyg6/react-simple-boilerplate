@@ -49,7 +49,7 @@ wss.on('connection', (client) => {
     var uUid = uuidv1();
     userCount++; //increase userCount on connect
     let onlineUsers = {
-        key: uUid,
+        id: uUid,
         userCount: userCount,
         isConnected: 'User has connected.'
     }
@@ -63,7 +63,7 @@ wss.on('connection', (client) => {
         console.log('Client disconnected.');
         userCount--;
         let onlineUsers = {
-            key: uUid2,
+            id: uUid2,
             userCount: userCount,
             isDisconnected: 'User has disconnected.'
         }
